@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: [{ id: "", name: "", completed: "", createdAt: "" }],
+  data: [],
   loading: false,
   error: "",
 };
 
-export const todoSlice = createSlice({
-  name: "todos",
+export const productSlice = createSlice({
+  name: "products",
   initialState,
   reducers: {
     pending(state) {
@@ -24,7 +24,7 @@ export const todoSlice = createSlice({
         error: action.payload,
       };
     },
-    fetchTodosSuccess(state, action) {
+    fetchProductSuccess(state, action) {
       return {
         ...state,
         loading: false,
@@ -32,22 +32,14 @@ export const todoSlice = createSlice({
         data: action.payload,
       };
     },
-    postTodoSuccess(state, action) {
-      return {
-        ...state,
-        loading: false,
-        error: "",
-        data: [action.payload, ...state.data],
-      };
-    },
   },
 });
 
 // Destructure and export the plain action creators
-export const { pending, errored, fetchTodosSuccess, postTodoSuccess } =
-  todoSlice.actions;
+export const { pending, errored, fetchProductSuccess } =
+productSlice.actions;
 
-export default todoSlice.reducer;
+export default productSlice.reducer;
 
 // create a thunk that dispatches action creators
 export const fetchTodos = () => async (dispatch, getState) => {
@@ -56,7 +48,7 @@ export const fetchTodos = () => async (dispatch, getState) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data.products);
-      dispatch(fetchTodosSuccess(data.products));
+      dispatch(fetchProductSuccess(data.products));
     })
     .catch((error) => {
       dispatch(errored(error.message));

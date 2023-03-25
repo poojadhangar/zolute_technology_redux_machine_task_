@@ -18,11 +18,11 @@ import "./users.css";
 
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTodos } from "../../redux/todos/todos";
+import { fetchTodos } from "../../redux/reducer/ProductReducer";
 import { useNavigate } from "react-router-dom";
 
 const Products = () => {
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
